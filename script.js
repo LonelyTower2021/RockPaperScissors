@@ -4,30 +4,37 @@
 // Scissors     Lose    Win     Draw
 
 function game() {
+    let computerSelection = computerPlay();
+    let playerSelection = playerPlay();
+
+    return result(computerSelection, playerSelection);
+}
+
+function result(computerSelection, playerSelection) {
     const ROCK = 'rock';
     const PAPER = 'paper';
     const SCISSORS = 'scissors';
 
-    let computerChoice = computerPlay();
-    let playerChoice = prompt("Enter your choice!");
-
-    playerChoice = playerChoice.toLowerCase();
-
-    if (computerChoice === ROCK && playerChoice === PAPER) {
+    if (computerSelection === ROCK && playerSelection === PAPER) {
         return "You Win! Paper beats Rock!";
-    } else if (computerChoice === ROCK && playerChoice === SCISSORS) {
+    } else if (computerSelection === ROCK && playerSelection === SCISSORS) {
         return "You Lose! Rock beats Scissors!";
-    } else if (computerChoice === PAPER && playerChoice === ROCK) {
+    } else if (computerSelection === PAPER && playerSelection === ROCK) {
         return "You Lose! Paper beats Rock!";
-    } else if (computerChoice === PAPER && playerChoice === SCISSORS) {
+    } else if (computerSelection === PAPER && playerSelection === SCISSORS) {
         return "You Win! Scissors beats Paper!";
-    } else if (computerChoice === SCISSORS && playerChoice === ROCK) {
+    } else if (computerSelection === SCISSORS && playerSelection === ROCK) {
         return "You Win! Rock beats Scissors!";
-    } else if (computerChoice === SCISSORS && playerChoice === PAPER) {
+    } else if (computerSelection === SCISSORS && playerSelection === PAPER) {
         return "You Lose! Scissors beats Paper!";
     } else {
-        return `Draw! ${computerChoice} and ${playerChoice}`;
+        return `Draw! ${playerSelection} ties with ${computerSelection}`;
     }
+}
+
+function playerPlay() {
+    let playerChoice = prompt("Enter your choice!");
+    return playerChoice.toLowerCase();
 }
 
 function computerPlay() {
