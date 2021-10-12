@@ -1,18 +1,12 @@
-//              Rock    Paper   Scissors
-// Rock         Draw    Lose    Win
-// Paper        Win     Draw    Lose
-// Scissors     Lose    Win     Draw
-
-
 function game() {
     const WIN = true;
     const LOSE = false;
+
     let playerScore = 0;
     let computerScore = 0;
-    let result = null;
 
     for (let i = 0; i < 5; i++) {
-        result = round();
+        let result = round();
         if (result === WIN) {playerScore++;}
         if (result === LOSE) {computerScore++;}
     }
@@ -34,25 +28,20 @@ function round() {
 }
 
 function result(computerSelection, playerSelection) {
-    const ROCK = 'rock';
-    const PAPER = 'paper';
-    const SCISSORS = 'scissors';
-
     let matchup = computerSelection + ',' + playerSelection;
-    let winCondition = ['rock,paper', 'paper,scissors', 'scissors,rock'];
-    let loseCondition = ['paper,rock', 'scissors,paper', 'rock,scissors'];
+    let winConditions = ['rock,paper', 'paper,scissors', 'scissors,rock'];
+    let loseConditions = ['paper,rock', 'scissors,paper', 'rock,scissors'];
 
-    if (winCondition.includes(matchup)) {
+    if (winConditions.includes(matchup)) {
         console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
         return true;
-    } else if (loseCondition.includes(matchup)) {
+    } else if (loseConditions.includes(matchup)) {
         console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
         return false;
     } else {
         console.log(`Draw! ${computerSelection} against ${playerSelection}`);
         return null;
     }
-
 }
 
 function playerPlay() {
