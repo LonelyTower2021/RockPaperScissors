@@ -3,7 +3,30 @@
 // Paper        Win     Draw    Lose
 // Scissors     Lose    Win     Draw
 
+
 function game() {
+    const WIN = true;
+    const LOSE = false;
+    let playerScore = 0;
+    let computerScore = 0;
+    let result = null;
+
+    for (let i = 0; i < 5; i++) {
+        result = round();
+        if (result === WIN) {playerScore++;}
+        if (result === LOSE) {computerScore++;}
+    }
+
+    if (playerScore > computerScore) {
+        return `You've won the game! ${playerScore} to ${computerScore}!!!`;
+    } else if (computerScore > playerScore) {
+        return `You've lost the game! ${playerScore} to ${computerScore}!!!`;
+    } else {
+        return `The game is a draw! ${playerScore} to ${computerScore}!!!`;
+    }
+}
+
+function round() {
     let computerSelection = computerPlay();
     let playerSelection = playerPlay();
 
@@ -15,21 +38,21 @@ function result(computerSelection, playerSelection) {
     const PAPER = 'paper';
     const SCISSORS = 'scissors';
 
-    if (computerSelection === ROCK && playerSelection === PAPER) {
-        return "You Win! Paper beats Rock!";
-    } else if (computerSelection === ROCK && playerSelection === SCISSORS) {
-        return "You Lose! Rock beats Scissors!";
-    } else if (computerSelection === PAPER && playerSelection === ROCK) {
-        return "You Lose! Paper beats Rock!";
-    } else if (computerSelection === PAPER && playerSelection === SCISSORS) {
-        return "You Win! Scissors beats Paper!";
-    } else if (computerSelection === SCISSORS && playerSelection === ROCK) {
-        return "You Win! Rock beats Scissors!";
-    } else if (computerSelection === SCISSORS && playerSelection === PAPER) {
-        return "You Lose! Scissors beats Paper!";
+    let matchup = computerSelection + ',' + playerSelection;
+    let winCondition = ['rock,paper', 'paper,scissors', 'scissors,rock'];
+    let loseCondition = ['paper,rock', 'scissors,paper', 'rock,scissors'];
+
+    if (winCondition.includes(matchup)) {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+        return true;
+    } else if (loseCondition.includes(matchup)) {
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        return false;
     } else {
-        return `Draw! ${playerSelection} ties with ${computerSelection}`;
+        console.log(`Draw! ${computerSelection} against ${playerSelection}`);
+        return null;
     }
+
 }
 
 function playerPlay() {
