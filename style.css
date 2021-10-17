@@ -4,6 +4,15 @@ body, html {
     background-color: aquamarine;
 }
 
+.round_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100px;
+    background-color: aqua;
+}
+
 .score_container {
     display: flex;
     justify-content: space-around;
@@ -29,6 +38,7 @@ h2 {
 
 h3 {
     font-size: 40px;
+    margin: 0;
 }
 
 .score {
@@ -38,7 +48,6 @@ h3 {
     background-color: goldenrod;
     width: 300px;
     height: 100px;
-    border: solid black 2px;
 }
 
 .btn_container {
@@ -54,6 +63,6 @@ h3 {
     font-size: 45px;
 }
 
-#resultText {
+#result_text {
     text-align: center;
 }

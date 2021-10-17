@@ -25,13 +25,13 @@ function round(e) {
     let resultText = '';
 
     if (result === WIN) {
-        resultText = `You win! ${playerSelection} beats ${computerSelection}!`;
+        resultText = `${playerSelection} beats ${computerSelection}!`;
         playerScore++;
     } else if (result === LOSE) {
-        resultText = `You lose! ${computerSelection} beats ${playerSelection}!`;
+        resultText = `${computerSelection} beats ${playerSelection}!`;
         computerScore++;
     } else {
-        resultText = `Draw! ${computerSelection} against ${playerSelection}`;
+        resultText = `${computerSelection} against ${playerSelection}`;
     }
 
     rounds++;
@@ -39,13 +39,31 @@ function round(e) {
 }
 
 function updateScoreUI(resultText) {
-    let resultDisplay = document.querySelector('#resultText');
-    let playerDisplay = document.querySelector('#playerScore');
-    let computerDisplay = document.querySelector('#computerScore');
+    let resultDisplay = document.querySelector('#result_text');
+    let playerDisplay = document.querySelector('#player_score');
+    let computerDisplay = document.querySelector('#computer_score');
+    let roundDisplay = document.querySelector('#round_display');
+    let gameDisplay = document.querySelector('#game_result');
 
     resultDisplay.textContent = resultText;
     playerDisplay.textContent = playerScore;
     computerDisplay.textContent = computerScore;
+    roundDisplay.textContent = `Round #${rounds}`
+    
+    if (rounds == 5){
+        if (playerScore > computerScore) {
+            gameDisplay.textContent = "YOU WIN!";
+        } else if (computerScore > playerScore) {
+            gameDisplay.textContent = "YOU LOSE!";
+        } else {
+            gameDisplay.textContent = "DRAW!";
+        }
+
+        const btns = document.querySelectorAll(".btn");
+        btns.forEach(btn => {
+            btn.disabled = true;
+        });
+    }
 }
 
 function getWinner(computerSelection, playerSelection) {
