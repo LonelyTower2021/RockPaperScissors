@@ -1,7 +1,19 @@
-function game(numRounds) {
-    const WIN = true;
-    const LOSE = false;
+// Home Screen is Displayed
+// Player makes a choice
+//      Player clicks button
+//      Click event is caught by window
+//      Window extracts value from event
+//      Return value
+// Computer makes a choice
+// Compare Choices
+// Update Score
+// Display Results
+// Continue until all rounds played
 
+const WIN = true;
+const LOSE = false;
+
+function game(numRounds) {
     let playerScore = 0;
     let computerScore = 0;
 
@@ -21,24 +33,20 @@ function game(numRounds) {
     console.log(`${playerScore} to ${computerScore}!!!`)
 }
 
-function round() {
-    const WIN = true;
-    const LOSE = false;
-
+function round(e) {
+    let playerSelection = e.target.value;
     let computerSelection = computerPlay();
-    let playerSelection = playerPlay();
 
     let result = getWinner(computerSelection, playerSelection);
 
+    let resultDisplay = document.querySelector('.result > .score');
     if (result === WIN) {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+        resultDisplay.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
     } else if (result === LOSE) {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        resultDisplay.textContent = `You lose! ${computerSelection} beats ${playerSelection}!`;
     } else {
-        console.log(`Draw! ${computerSelection} against ${playerSelection}`);
+        resultDisplay.textContent = `Draw! ${computerSelection} against ${playerSelection}`;
     }
-
-    return result;
 }
 
 function getWinner(computerSelection, playerSelection) {
@@ -55,8 +63,8 @@ function getWinner(computerSelection, playerSelection) {
     }
 }
 
-function playerPlay() {
-    let playerChoice = prompt("Enter your choice!");
+function playerPlay(e) {
+    // On click, submit choice here
     return playerChoice.toLowerCase();
 }
 
@@ -71,4 +79,7 @@ function _randomNumber(ceiling) {
     return Math.floor(Math.random() * ceiling);
 }
 
-game(5);
+const btns = document.querySelectorAll(".btn");
+btns.forEach(btn => {
+   btn.addEventListener('click', round); 
+});

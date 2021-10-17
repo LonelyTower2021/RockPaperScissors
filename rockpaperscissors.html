@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
     <link rel="stylesheet" href="./style.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
    <div class="score_container">
-       <div class="result">
+       <div class="player">
            <h2>Player</h2>
            <div class="score">
            </div>
@@ -20,16 +20,16 @@
             <div class="score">
             </div>
        </div>
-       <div class="result">
+       <div class="computer">
            <h2>Computer</h2>
            <div class="score">
            </div>
        </div>
    </div>
    <div class="btn_container">
-       <button id="rock_btn" class="btn">Rock</button>
-       <button id="paper_btn" class="btn">Paper</button>
-       <button id="scissors_btn" class="btn">Scissors</button>
+       <button id="rock_btn" class="btn" value="rock">Rock</button>
+       <button id="paper_btn" class="btn" value="paper">Paper</button>
+       <button id="scissors_btn" class="btn" value="scissors">Scissors</button>
    </div>
 </body>
 </html>
