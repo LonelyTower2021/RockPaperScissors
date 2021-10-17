@@ -10,43 +10,42 @@
 // Display Results
 // Continue until all rounds played
 
-const WIN = true;
-const LOSE = false;
-
-function game(numRounds) {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (let i = 0; i < numRounds; i++) {
-        let result = round();
-        if (result === WIN) {playerScore++;}
-        if (result === LOSE) {computerScore++;}
-    }
-
-    if (playerScore > computerScore) {
-        console.log("You've won the game!");
-    } else if (computerScore > playerScore) {
-        console.log("You've lost the game!");
-    } else {
-        console.log("The game is a draw!")
-    }
-    console.log(`${playerScore} to ${computerScore}!!!`)
-}
+let playerScore = 0;
+let computerScore = 0;
+let rounds = 0;
 
 function round(e) {
+    const WIN = true;
+    const LOSE = false;
+
     let playerSelection = e.target.value;
     let computerSelection = computerPlay();
 
     let result = getWinner(computerSelection, playerSelection);
+    let resultText = '';
 
-    let resultDisplay = document.querySelector('.result > .score');
     if (result === WIN) {
-        resultDisplay.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
+        resultText = `You win! ${playerSelection} beats ${computerSelection}!`;
+        playerScore++;
     } else if (result === LOSE) {
-        resultDisplay.textContent = `You lose! ${computerSelection} beats ${playerSelection}!`;
+        resultText = `You lose! ${computerSelection} beats ${playerSelection}!`;
+        computerScore++;
     } else {
-        resultDisplay.textContent = `Draw! ${computerSelection} against ${playerSelection}`;
+        resultText = `Draw! ${computerSelection} against ${playerSelection}`;
     }
+
+    rounds++;
+    updateScoreUI(resultText);
+}
+
+function updateScoreUI(resultText) {
+    let resultDisplay = document.querySelector('#resultText');
+    let playerDisplay = document.querySelector('#playerScore');
+    let computerDisplay = document.querySelector('#computerScore');
+
+    resultDisplay.textContent = resultText;
+    playerDisplay.textContent = playerScore;
+    computerDisplay.textContent = computerScore;
 }
 
 function getWinner(computerSelection, playerSelection) {
@@ -61,11 +60,6 @@ function getWinner(computerSelection, playerSelection) {
     } else {
         return null;
     }
-}
-
-function playerPlay(e) {
-    // On click, submit choice here
-    return playerChoice.toLowerCase();
 }
 
 function computerPlay() {
